@@ -6,7 +6,6 @@
 		"cf-typegen": "wrangler types --env-interface CloudflareBindings"
 	},
 	"dependencies": {
-		"@fiberplane/hono-otel": "0.1.0-beta.10",
 		"hono": "^4.5.7"
 	},
 	"devDependencies": {

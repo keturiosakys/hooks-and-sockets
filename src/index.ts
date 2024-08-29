@@ -1,6 +1,5 @@
 import { Hono } from "hono";
 import { WebhookReceiver } from "./receiver";
-import { instrument, measure } from "@fiberplane/hono-otel";
 
 type Variables = {
 	receiver: DurableObjectStub<WebhookReceiver>;
@@ -40,13 +39,11 @@ app.all("/receiver-listen/*", async (c) => {
 	}
 
 	const stub = c.get("receiver");
-
-	const measuredBroadcast = measure("broadcast", async () => await stub.broadcast(JSON.stringify(received)));
-	await measuredBroadcast();
+	await stub.broadcast(JSON.stringify(received))
 
 	return c.text("OK");
 })
 
 export { WebhookReceiver };
 
-export default instrument(app);
+export default app;
